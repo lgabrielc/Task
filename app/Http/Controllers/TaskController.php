@@ -14,7 +14,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::all();
+        $Tasks = Task::all();
+        return response()->json($Tasks);
     }
     /**
      * Store a newly created resource in storage.
@@ -24,18 +25,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation([
+        $validate = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
             'completed' => 'required|string',
             'due_date' => 'required|date',
         ]);
-        $task = Task::create([
-            'title' => $request['title'],
-            'description' => $request['description'],
-            'completed' => $request['completed'],
-            'due_date' => $request['due_date'],
-        ]);
+        $task = Task::create($validate);
+        // ]);
+        // $task = Task::create([
+        //     'title' => $request['title'],
+        //     'description' => $request['description'],
+        //     'completed' => $request['completed'],
+        //     'due_date' => $request['due_date'],
+        // ]);
         return $task;
     }
     /**
