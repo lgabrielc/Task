@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/task', [TaskController::class, 'index']);
 Route::get('/task/{id}', [TaskController::class, 'show']);
-Route::post('/task/{id}', [TaskController::class, 'store']);
-Route::put('/task/update{id}', [TaskController::class, 'update']);
-Route::delete('/task/destroy{id}', [TaskController::class, 'destroy']);
+Route::post('/task', [TaskController::class, 'store']);
+Route::put('/task/{id}', [TaskController::class, 'update']);
+Route::delete('/task/{id}', [TaskController::class, 'destroy']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

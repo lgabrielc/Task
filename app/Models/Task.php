@@ -14,6 +14,6 @@ class Task extends Model
         'title',
         'description',
         'completed',
-        'due_dated',
+        'due_date',
     ];
 }

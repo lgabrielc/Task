@@ -25,21 +25,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // return 'end';
         $validate = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
             'completed' => 'required|string',
             'due_date' => 'required|date',
         ]);
-        $task = Task::create($validate);
-        // ]);
-        // $task = Task::create([
-        //     'title' => $request['title'],
-        //     'description' => $request['description'],
-        //     'completed' => $request['completed'],
-        //     'due_date' => $request['due_date'],
-        // ]);
-        return $task;
+        $Task = Task::create([
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'completed' => $request['completed'],
+            'due_date' => $request['due_date'],
+        ]);
+        return response()->json($Task);
     }
     /**
      * Display the specified resource.
@@ -61,19 +60,20 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validation([
+        $validate = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
             'completed' => 'required|string',
-            'description' => 'required|date',
             'due_date' => 'required|date',
         ]);
-        Task::find($id)->update([
+        
+        $task = Task::find($id)->update([
             'title' => $request['title'],
             'description' => $request['description'],
             'completed' => $request['completed'],
             'due_date' => $request['due_date'],
         ]);
+        return response()->json($task);
     }
 
     /**
@@ -84,6 +84,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        Task::find($id)->delete();
+        $task = Task::find($id)->delete();
+        return response()->json($task);
     }
 }
